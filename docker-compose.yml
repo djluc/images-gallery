@@ -1,0 +1,13 @@
+## versiunea de docker compose pe care o folosim
+version: '3'
+
+## serviciile pe care dorim sa le pornim (frontend si api), cu locatia in care se afla fisierele docker pentru fiecare in parte (./frontend si ./api) si apoi porturile
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
+  api:
+    build: ./api
+    ports:
+      - '5050:5050'
