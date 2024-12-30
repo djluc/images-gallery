@@ -11,6 +11,10 @@ COPY package-lock.json ./
 
 RUN npm install --silent
 
+## am adaugat urmatoarea linie pentru a rezolva eroarea (EACCES: permission denied, mkdir '/app/node_modules/.cache') din browser aparuta dupa folosirea Volumes
+
+RUN mkdir /app/node_modules/.cache && chmod -R 777 /app/node_modules/.cache
+
 COPY . ./
 
 CMD ["npm", "start"]

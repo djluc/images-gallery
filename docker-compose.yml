@@ -4,10 +4,22 @@ version: '3'
 ## serviciile pe care dorim sa le pornim (frontend si api), cu locatia in care se afla fisierele docker pentru fiecare in parte (./frontend si ./api) si apoi porturile
 services:
   frontend:
+    restart: always
     build: ./frontend
     ports:
       - '3000:3000'
+## aici se mapeaza volumele; 
+## a doua linie suprascrie folderul app din container cu folderul frontend local;
+## prima linie arata ca folderul node_modules din container trebuie pastrat chiar daca el nu se afla in folderul frontend local (a fost instalat direct in container)
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    environment:
+    - CHOKIDAR_USEPOLLING=true
   api:
+    restart: always
     build: ./api
     ports:
       - '5050:5050'
+    volumes:
+      - ./api:/app
